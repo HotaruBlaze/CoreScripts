@@ -702,6 +702,11 @@ function OnMpNumIncrement(currentMpNum)
     eventHandler.OnMpNumIncrement(currentMpNum)
 end
 
+function OnServerConsoleInput(command)
+    tes3mp.LogMessage(enumerations.log.INFO, "Called \"OnServerConsoleInput\" - Command: ".. command)
+    eventHandler.OnServerConsoleInput(command)
+end
+
 -- Timer-based events
 function OnLoginTimeExpiration(pid, accountName)
     eventHandler.OnLoginTimeExpiration(pid, accountName)

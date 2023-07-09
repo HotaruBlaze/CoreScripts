@@ -508,6 +508,19 @@ eventHandler.InitializeDefaultHandlers = function()
         tes3mp.SendObjectDialogueChoice(false, false)
     end)
 
+    customEventHooks.registerHandler("OnServerConsoleInput", function(eventStatus, command)
+        if eventStatus.validDefaultHandler == false then return end
+        tes3mp.LogAppend(enumerations.log.INFO, "Recieved OnServerConsoleInput, with the following data:".."\""..command.."\"")
+    end)
+
+end
+
+eventHandler.OnServerConsoleInput = function(command)
+    local eventStatus = customEventHooks.triggerValidators("OnServerConsoleInput", {command})
+
+    if eventStatus.validDefaultHandler then
+        customEventHooks.triggerHandlers("OnServerConsoleInput", eventStatus, {command})
+    end
 end
 
 eventHandler.OnPlayerConnect = function(pid, playerName)
